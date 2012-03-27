@@ -1,0 +1,32 @@
+body{
+  text-align:center;
+  }
+#all, .all{
+  max-width:860px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:left;
+}
+
+#notice{ color:green; }
+#error{ color:red; }
+.small{ font-size:small;}
+
+img{ max-width:100%; }
+
+.lightgray{color:lightgray}
+
+.none{display:none}
+a{color:grey}
+.h1{font-size:7em}
+.h2{font-size:3em}
+.right{float:right}
+.left{float:left}
+.clear{clear:both}
+nick{color:lightpink}
+.mine{color:yellow}
+.x-small{font-size:x-small}
+span.link{font-size:x-large}
+th{padding:0px 10px
+    
+}

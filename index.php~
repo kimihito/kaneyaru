@@ -1,0 +1,69 @@
+<?php 
+    require_once 'dbconf.php';
+    session_start();
+
+   $con = mysql_connect(HOST, USERNAME, PASSWORD);
+   if(!$con){
+       exit('データベースに接続できませんでした');
+   }
+   
+   $result = mysql_select_db (TABLE, $con);
+   
+   if(!$result){
+       exit('データベースを選択できませんでした');
+   }
+   
+   $result = mysql_query("SET NAMES utf8", $con);
+   
+   if(!$result){
+       exit('文字コードを指定できませんでした');
+   }
+   
+   $result = mysql_query("SELECT * FROM `". TABLE ."` ", $con);
+   
+   if(!$result){
+       die(mysql_error());
+   }
+
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>金やる</title>
+        <link href="http://ssig33.com/common.css" media="screen" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div id="all">
+            <p><a href="oauthtweet.php">Sign in with Twitter</a></p>
+            <h1>金やる</h1>
+            <p>金やるはインターネットの投げ銭サイトです</p>
+            <h2><a href="oauthtweet.php">Twitter アカウントでログインしてお金を投げる</a></h2>
+            <table>
+                <tr>
+                    <th>Twitter</th>
+                    <th>あげたい金額</th>
+                    <th>こんな人にあげたい</th>
+                </tr>
+                 <?php
+                 while($data = mysql_fetch_array($result)): 
+                  ?>
+                    <tr>
+                         <th> <?php print '<img src="http://img.tweetimag.es/i/'  . htmlspecialchars($_SESSION['screen_name']) . '_b">' ?>
+                        </th>
+                        <th><?php print(htmlspecialchars($data['money'])); ?></th>
+                        <th><?php print(htmlspecialchars($data['want'])); ?></th>
+                    </tr>
+                <?php     
+              endwhile;
+                 $con = mysql_close($con);
+                 if(!$con){
+                     exit('データベースとの接続を閉じられませんでした。');
+                 }
+                 ?>
+                </tr>
+                 </table>
+        </div>
+        
+    </body>
+</html>
