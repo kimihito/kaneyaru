@@ -179,7 +179,6 @@
       // アクセス・トークンを取得
       $token = $client->getAccessToken($_GET['oauth_verifier']);
 
-
       if (empty($token['oauth_token'])) {
         /* アクセス・トークンがなければ、何らかの理由で取得失敗した。
          * もう一度リクエスト・トークンを生成して認証を試みる。
@@ -246,8 +245,6 @@
       // 認証されていなければ、Twitterの認証ページに誘導する。
       PrintAuthPage($ret['auth_addr']);
 
-      ExecApp($ret['client']);
-      header('Location: http://localhost:8888/twitteroauth/form.php');
 
     } else {
       // 認証していれば、アプリを実行してページを表示する。
