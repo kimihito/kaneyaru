@@ -1,6 +1,7 @@
 <?php
-session_start();
-require_once('twitteroauth.php');
+sessiton_start();
+
+require_once 'twitteroauth.php';
 
 $consumer_key = "5NQodaEga8MThaZs2xr2g";
 $consumer_secret = "GXQiryxprtOXq7QQEQwDp45uhTMyZeCuCPl4c82g838";
@@ -9,7 +10,7 @@ $consumer_secret = "GXQiryxprtOXq7QQEQwDp45uhTMyZeCuCPl4c82g838";
 $verifier = $_GET['oauth_verifier'];
 
 //OAuthオブジェクト生成
-$to = new TwitterOAuth($consumer_key, $consumer_secret, $_SESSION['request_token'], $_SESSION['request_token_secret']);
+$twitter_oauth = new TwitterOAuth($consumer_key, $consumer_secret, $_SESSION['request_token'], $_SESSION['request_token_secret']);
 
 //oauth_verifierを使ってAccess tokenを取得
 $access_token = $to->getAccessToken($verifier);
@@ -24,6 +25,9 @@ $_SESSION['user_id'] = $access_token['user_id'];
 //スクリーンネーム
 $_SESSION['screen_name'] = $access_token['screen_name'];
 
-header("Location: form.php");
+echo $_SESSION['user_id'];
+echo $_SESSION['screen_name'];
+echo ' <img src="http://img.tweetimag.es/i/'. $_SESSION ['screen_name'].'>';
+
 ?>
 
