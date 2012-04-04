@@ -1,9 +1,26 @@
 <?php 
   session_start();
+  require_once('twitteroauth.php');
   require_once 'dbconf.php';
-  require_once 'twitteroauth.php';
   print_r($_SESSION);
+
+  //  //Consumer keyの値   
+  $consumer_key = "5NQodaEga8MThaZs2xr2g";
+  //Consumer secretの値
+  $consumer_secret = "GXQiryxprtOXq7QQEQwDp45uhTMyZeCuCPl4c82g838";
+  //OAuthオブジェクト生成
+  $to = new TwitterOAuth($consumer_key, $consumer_secret);
+  // callbackURLを指定してRequest tokenを取得
+  $tok = $to->getRequestToken("http://localhost:8888/kaneyaru/callback.php");
+  // セッションに保存
+  $_SESSION['request_token'] = $token = $tok['oauth_token'];
+  $_SESSION['request_token_secret'] = $tok['oauth_token_secret'];
+  //AuthorizeURLを取得
+  $url = $to->getAuthorizeURL($token);
+
+
   $con = mysql_connect(HOST, USERNAME, PASSWORD);
+
   if(!$con){
     exit('データベースに接続できませんでした');
   }
@@ -25,7 +42,20 @@
   if(!$result){
     die(mysql_error());
   }
-
+  //  //Consumer keyの値   
+  //  $consumer_key = "5NQodaEga8MThaZs2xr2g";
+  //  //Consumer secretの値
+  //  $consumer_secret = "GXQiryxprtOXq7QQEQwDp45uhTMyZeCuCPl4c82g838";
+  //  //OAuthオブジェクト生成
+  //  $to = new TwitterOAuth($consumer_key, $consumer_secret);
+  //  // callbackURLを指定してRequest tokenを取得
+  //  $tok = $to->getRequestToken("http://localhost:8888/kaneyaru/callback.php");
+  //  // セッションに保存
+  //  $_SESSION['request_token'] = $token = $tok['oauth_token'];
+  //  $_SESSION['request_token_secret'] = $tok['oauth_token_secret'];
+  //  //AuthorizeURLを取得
+  //  $url = $to->getAuthorizeURL($token);
+  //
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,7 +66,7 @@
 </head>
 <body>
 <div id="all">
-      <p><a href="<?php echo $url; ?>">Sign in with Twitter</a></p>
+      <p><a href="<?php echo $url;?>">Sign in with Twitter</a></p>
         <h1><a href="index.php">金やる</a></h1>
         <p>金やるはインターネットの投げ銭サイトです</p>
       <h2><a href="<?php echo $url; ?>">Twitter アカウントでログインしてお金を投げる</a></h2>
@@ -45,7 +75,6 @@
         <th>Twitter</th>
         <th>あげたい金額</th>
         <th>こんな人にあげたい</th>
-        <th>この人にたかる</th>
         </tr>
         <?php
           while($data = mysql_fetch_array($result)): 
