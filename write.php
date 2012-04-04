@@ -1,6 +1,6 @@
 <?php
 require_once 'dbconf.php';
-
+require_once('twitteroauth.php');
 session_start();
  $con = mysql_connect(HOST, USERNAME, PASSWORD);
 
@@ -19,6 +19,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $name = cnv_dbstr($_SESSION['screen_name']);  //$_POST使わないといけない気がする;
     $money = cnv_dbstr($_POST["money"]);
     $want = cnv_dbstr($_POST["want"]);
+    }else{
+      echo "ユーザー名が入ってません";
     }
     
     if(!empty($money) && !empty($want)){
@@ -26,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       //echo $sql;
       mysql_query($sql);
       
-      header("Location: http://localhost:8888/twitteroauth/index.php" ); 
+      header("Location: http://localhost:8888/kaneyaru/index.php" ); 
     }
    
   // var_dump($sql);

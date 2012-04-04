@@ -1,7 +1,7 @@
 <?php
 define("HOST", 'localhost');
-define("USERNAME", 'hogehoge');
-define("PASSWORD", 'hogehoge');
+define("USERNAME", 'yume');
+define("PASSWORD", 'yumekaki');
 define("TABLE", 'kaneyaru');
 
 ?>
