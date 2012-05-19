@@ -2,7 +2,6 @@
   session_start();
   require_once('twitteroauth.php');
   require_once 'dbconf.php';
-  print_r($_SESSION);
 
   //  //Consumer keyの値   
   $consumer_key = "5NQodaEga8MThaZs2xr2g";
@@ -11,7 +10,7 @@
   //OAuthオブジェクト生成
   $to = new TwitterOAuth($consumer_key, $consumer_secret);
   // callbackURLを指定してRequest tokenを取得
-  $tok = $to->getRequestToken("http://localhost:8888/kaneyaru/callback.php");
+  $tok = $to->getRequestToken("http://kaneyaru.geeoki.com/callback.php");
   // セッションに保存
   $_SESSION['request_token'] = $token = $tok['oauth_token'];
   $_SESSION['request_token_secret'] = $tok['oauth_token_secret'];
@@ -62,7 +61,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>金やる</title>
-<link href="http://localhost:8888/kaneyaru/common.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./common.css" media="screen" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="all">

@@ -19,7 +19,7 @@ $_SESSION['oauth_token'] = $access_token['oauth_token'];
 $_SESSION['oauth_token_secret'] = $access_token['oauth_token_secret'];
 
 //TwitterのID
-$_SESSION['user_id'] = $access_token['user_id'];
+//$_SESSION['name'] = $access_token['name'];
 
 //スクリーンネーム
 $_SESSION['screen_name'] = $access_token['screen_name'];

@@ -28,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       //echo $sql;
       mysql_query($sql);
       
-      header("Location: http://localhost:8888/kaneyaru/index.php" ); 
+      header("Location: http://kaneyaru.geeoki.com/index.php" ); 
     }
    
   // var_dump($sql);
